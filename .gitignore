@@ -1,0 +1,18 @@
+# Runtime secrets and personal content
+.env
+.env.*
+!.env.example
+data/*
+!data/.gitkeep
+
+# Local browser profiles, caches, and scratch scripts
+.runtime/
+
+# Logs and operating-system junk
+*.log
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Dependencies, if any are added later
+node_modules/

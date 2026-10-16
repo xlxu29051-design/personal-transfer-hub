@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#f5f7fb" />
+    <title>Transfer Hub · 个人传输站</title>
+    <link rel="stylesheet" href="/styles.css?v=15" />
+  </head>
+  <body>
+    
+    <div id="classify-modal" class="classify-modal" hidden>
+      <div class="classify-backdrop" data-close-classify></div>
+      <section class="classify-dialog" role="dialog" aria-modal="true" aria-labelledby="classify-title">
+        <header><h3 id="classify-title">移动到分类</h3><button class="icon-button" type="button" data-close-classify aria-label="关闭">×</button></header>
+        <div id="classify-options" class="classify-options"></div>
+      </section>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <div id="about-modal" class="about-modal" hidden>
+      <div class="about-backdrop" data-close-about></div>
+      <section class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="about-title" tabindex="-1">
+        <button class="icon-button about-close" type="button" data-close-about aria-label="关闭简介">×</button>
+        <p class="eyebrow">BETWEEN DEVICES</p>
+        <h2 id="about-title">不用再两头找</h2>
+        <p class="about-lead">一段话、一张图、一个文件，放这里就集中了。换一台设备，打开同一个网址就能看到。</p>
+        <div class="about-points">
+          <div class="about-point"><span>01</span><div><strong>来由</strong><p>这些东西分散在不同设备上，分开传就容易丢。所以做了这个只给自己用的小站。</p></div></div>
+          <div class="about-point"><span>02</span><div><strong>用法</strong><p>在底部写下文字，或直接粘贴图片和文件，再点发送。不想粘贴，就点「添加」。</p></div></div>
+          <div class="about-point"><span>03</span><div><strong>结果</strong><p>发送后会出现在上方。另一台设备输入访问密钥进入，还是这些。只有你删除，才会消失。</p></div></div>
+        </div>
+        <button id="about-done" class="primary-button" type="button">知道了</button>
+      </section>
+    </div>
+    <div id="preview-modal" class="preview-modal" hidden>
+      <div class="preview-backdrop" data-close-preview></div>
+      <section class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+        <header class="preview-header"><div><p class="eyebrow">PREVIEW</p><h3 id="preview-title">文件预览</h3></div><div class="preview-header-actions"><a id="preview-download" class="preview-download" hidden>下载</a><button class="icon-button" data-close-preview aria-label="关闭预览">×</button></div></header>
+        <div id="preview-body" class="preview-body"></div>
+      </section>
+    </div>
+    <main id="login-view" class="login-view" hidden>
+      <section class="login-card">
+        <div class="brand-mark">↗</div>
+        <p class="eyebrow">PRIVATE TRANSFER HUB</p>
+        <h1>你的跨设备资料站</h1>
+        <p class="muted">把文字、文件和图片留在自己的空间里，手机和电脑打开同一个网址即可继续使用。</p>
+        <form id="login-form" class="stack">
+          <label for="password">访问密钥</label>
+          <div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" placeholder="输入访问密钥" required minlength="8" spellcheck="false" autocapitalize="off" autocorrect="off" enterkeyhint="go" /><button id="toggle-password" type="button" aria-pressed="false" aria-label="显示访问密钥">显示</button></div>
+          <button class="primary-button" type="submit">进入空间 <span>→</span></button>
+          <p id="login-error" class="form-error" aria-live="polite"></p>
+        </form>
+      </section>
+      <p class="login-footnote">个人私有空间 · 内容会持续保存，只有你主动删除才会移除</p>
+    </main>
+
+    <div id="app-view" class="app-shell" hidden>
+      <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="brand"><span class="brand-mark small">↗</span><span>Transfer Hub</span></div>
+        </div>
+        <div class="space-heading">
+          <p class="sidebar-label">我的空间</p>
+          <button id="new-topic" class="space-add" type="button">＋ 分类</button>
+        </div>
+        <nav id="topic-list" class="topic-list"></nav>
+        <div class="trash-slot"><button id="trash-link" class="topic-item" type="button"><span class="topic-icon">⌧</span><span>废纸篓</span><span id="trash-count" class="topic-count"></span></button></div>
+        <div class="sidebar-bottom">
+          <div class="storage-hint"><span class="status-dot"></span><span id="usage-label">内容 0 B</span></div>
+          <button id="logout" class="ghost-button">退出空间</button>
+        </div>
+      </aside>
+
+      <section class="content-area">
+        <header class="topbar">
+          <button id="mobile-menu" class="icon-button mobile-only" aria-label="打开分类列表"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7.5h14M5 12h14M5 16.5h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+          <div class="breadcrumb"><span id="mobile-brand">Transfer Hub</span><span class="crumb-separator">/</span><strong id="topic-title">全部记录</strong></div>
+          <div class="brand mobile-lockup"><span class="brand-mark small">↗</span><span>Transfer Hub</span></div>
+          <div class="topbar-actions"><button id="about-open" class="about-open" type="button">简介</button><button id="sync-label" class="sync-label" type="button" title="点击刷新">已同步</button></div>
+        </header>
+
+        <div class="content-scroll">
+          <div class="content-inner">
+            <section class="hero-row">
+              <div>
+                <p class="eyebrow" id="topic-eyebrow">ALL RECORDS</p>
+                <h2 id="hero-title">全部记录</h2>
+                <p id="hero-subtitle" class="muted">所有分类里的内容都会留在这里。</p>
+              </div>
+              <div id="topic-actions" class="topic-actions"></div>
+            </section>
+
+            <section class="feed-heading"><div class="feed-title"><h3 id="feed-label">最近记录</h3><span id="record-count" class="muted"></span></div><button id="select-toggle" class="select-button" type="button" aria-pressed="false">选择</button><div class="search-wrap"><span>⌕</span><input id="search-input" type="search" placeholder="搜索记录" /></div></section>
+            <div id="selection-bar" class="selection-bar" hidden><div class="selection-main"><label class="master-check"><input id="select-all-box" type="checkbox" aria-label="全选" /><span id="select-all-label">全选</span></label><span id="selection-count">已选 0 条</span></div><div class="selection-actions"><button id="selection-classify" class="bar-button" type="button">分类</button><button id="selection-restore" class="bar-button" type="button" hidden>还原</button><button id="selection-delete" class="bar-button danger" type="button">删除</button><button id="selection-purge" class="bar-button danger" type="button" hidden>永久删除</button><button id="selection-cancel" class="bar-button" type="button">取消</button></div></div>
+            <section id="feed" class="feed"></section>
+            <div id="empty-state" class="empty-state" hidden><div class="empty-icon">✦</div><h3>还没有记录</h3><p class="muted">把一段文字或一个文件放进来，它会一直留在你的空间里。</p></div>
+          </div>
+        </div>
+        <form id="composer" class="composer card">
+          <div class="composer-inner">
+            <div class="composer-box">
+              <div id="composer-preview" class="composer-preview" hidden></div>
+              <textarea id="note-input" rows="2" placeholder="随心输入"></textarea>
+              <div class="composer-toolbar">
+                <div class="composer-tools"><button id="attach-button" class="attach-button" type="button">添加</button><span id="save-target" class="save-target">保存到 未分类</span></div>
+                <button id="send-button" class="primary-button compact" type="submit">发送</button>
+              </div>
+              <input id="file-input" type="file" multiple hidden />
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+    <script src="/app.js?v=27" defer></script>
+  </body>
+</html>

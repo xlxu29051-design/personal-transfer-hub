@@ -1,0 +1,21 @@
+{
+  "name": "personal-transfer-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A private, persistent file and note transfer hub for personal devices.",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xlxu29051-design/personal-transfer-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xlxu29051-design/personal-transfer-hub/issues"
+  },
+  "homepage": "https://github.com/xlxu29051-design/personal-transfer-hub#readme"
+}
